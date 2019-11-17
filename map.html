@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>MAP</title>
+</head>
+<body>
+<center>
+	<div id="" style="height:60px; width:auto; background-color:rgb(200,200,200);color:white; font-size:50px;">
+		INDIAN RENEWABE SOURCES OF ENERGY MAP
+	</div>
+	<br/>
+	<div style="height:auto; width:auto; border: 1px solid #a1a1a1; padding: 4px; background: #dddddd;border-radius: 20px;">
+		Click on the State below to get their information
+	</div> <br/>
+
+	<div id="map" style="height:480px; width:520px; ">
+
+	</div>
+	<br/>
+	<div style="height:auto; width:auto; background-color:grey; color:white;">
+		CIC SEMERSET LONG PROJECT BY<br/>
+		K V VIJAYGOPAL<br/>
+		ANKUR RATHORE
+	</div>
+	<div id="" class="footer">
+
+	</div>
+</center>
+</body>
+</html>
+<script>
+    //staten,lat,long,image,FAEI,SolarEnergy,SmallEnergy,Biomass,Congeration,Wind
+    var locations = [
+        ["Maharashtra",18.975,72.825833,"maharashtra.jpg", "NA", "64320", "794", "1887", "1250", "5961"],
+        ["Delhi",28.666667,77.216667,"delhi.jpg","NA", "2050", "0", "0", "0", "0"],
+        ["Karnataka",12.983333,77.583333,"karnataka.jpg", "NA", "24700", "4141", "1131", "450", "13593"],
+        ["Telangana",17.375278,78.474444,"telangana.jpg", "NA", "20410", "0", "0", "0", "0"],
+        ["Tamilnadu",13.083333,80.283333,"tamil nadu.jpg", "NA", "17670", "660", "1070", "450", "14152"],
+        ["West Bengal",22.569722,88.369722,"west bengal.jpg", "NA", "6260", "396", "396", "0", "22"],
+        ["Rajasthan",24.583333,86.85,"rajsthan.jpg", "NA", "14230", "57", "1039", "0", "5050"],
+        ["Uttar Pradesh",26.85,80.916667, "up.jpg", "NA", "22830", "461", "1617", "1250", "1260"],
+        ["Madhya Pradesh",23.266667,77.4,"mp.jpg", "NA", "61660", "820", "1364", "0", "2931"],
+        ["Bihar",23.3,82.666667,"bihar.jpg", "Availibilty  of Ganga river and its tributiries makes hydro the best for future investement.", "11200", "223", "619", "300", "144"],
+        ["Jammu and Kashmir",30.216667,78.783333,"j&k.jpg", "NA", "111050", "1431", "43", "0", "5685"],
+        ["Jharkhand",23.35,85.333333,"jharkhand.jpg", "NA", "18180", "209", "90", "0", "91"],
+        ["Chhattisgarh",30.316667,78.1,"chattisgarh.jpg", "Hydro is the best for future investmnet.", "18270", "1107", "236", "0", "314"],
+        ["Assam",26.183333,91.733333,"assam.jpg", "Presence of Brahamputra river makes hydro the best for future investmnet.", "13760", "239", "212", "0", "112"],
+        ["Chandigarh",30.7343,76.7933,"chandigarh.jpg", "", "0", "0", "0", "0", "0"],
+        ["Orissa",20.233333,85.833333,"orissa.jpg", "NA", "25780", "295", "246", "0", "1384"],
+        ["Kerala",8.506944,76.956944, "kerala.jpg", "NA", "6110", "704", "1044", "0", "837"],
+        ["Manipur",24.816667,93.95,"manipur.jpg", "NA", "10630", "109", "13", "0", "56"],
+        ["Andhra Pradesh",14.913181,79.99,"andhra pradesh.jpg", "High availability of wind resources makes wind energy production the best energy source for future power investement.", "38440", "978", "578", "300", "14497"],
+        ["Puducherry",11.93,79.83, "pudcherry.jpg", "NA", "0", "0", "0", "0", "120"],
+        ["Andaman And Nicobar",8.0,77.2,"andaman&nicobar.jpg", "Since andaman nicobar is a island and the best alternate power energy for investement will be hydro(tidal power generation).Solar power generation can also be done there.", "0", "8", "0", "0", "365"],
+        ["Arunachal Pradesh",27.0696601,93.550854,"arunachal pradesh.jpg", "small hydro power is the best alternate power source for future investemenet.", "10236", "1341", "8", "0", "236"],
+        ["Dadra And Nagar Haveli",20.1808672,73.0169135,"dadra and nagar haveli.jpg", "Hydro is the best for future investment.", "0", "0", "0", "0", "0"],
+        ["Daman & Due",20.3973736,72.8327991,"daman and diu.jpg", "Hydro is the best for future invetmnet.", "0", "0", "0", "0", "4"],
+        ["Goa",15.3991304,74.0123851, "goa.jpg", "NA", "880", "7", "26", "0", "0"],
+        ["Gujarat",23.2156354,72.6369415,"gujrat.jpg", "wind energy is the best for future alternate energy investment.", "35770", "202", "1221", "350", "35071"],
+        ["Haryana",28.4594965,77.0266383,"haryana.jpg", "NA", "4560", "110", "1333", "350", "93"],
+        ["Himachal Pradesh",32.1346319,75.6891699,"himachal pradesh.jpg", "NA", "33840", "2398", "142", "0", "64"],
+        ["Lakshadweep",10.8126222,73.6801092,"lakshadweep.jpg", "NA", "0", "0", "0", "0", "0"],
+        ["Meghalaya",25.6746653,90.0279867, "meghalya.jpg", "NA", "5860", "230", "11", "0", "82"],
+        ["Mizoram",23.727107,92.7176389,"mizoram.jpg", "NA", "9090", "169", "1", "0", "0"],
+        ["Punjab",31.9400094,75.2479061, "punjab.jpg", "NA", "2810", "441", "3172", "300", "0"],
+        ["Sikkim",27.3389356,88.6065035,"sikkim.jpg", "NA", "4940", "267", "2", "0", "98"],
+        ["Tripura",23.5194679,91.6542094,"tripura.jpg", "NA", "2080", "47", "3", "0", "0"],
+        ["Uttarakhand",29.5892407,79.646666,"uttrakhnad.jpg", "NA", "16800", "1708", "24", "0", "534"],
+        ["Nagaland",25.6586, 94.1053,"nagalnad.jpg", "NA", "7290", "197", "10", "0", "16"]
+    ];
+    //map config
+    var image = 'eicon.png';
+    function initMap() {
+        var uluru = {lat: 23.2599, lng: 77.4126};
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 4,
+            center: uluru
+        });
+        var marker, i;
+        for (i = 0; i < locations.length; i++) {
+            marker = new google.maps.Marker({
+                position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+                map: map,
+                //icon:image
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    var content = '<table border="1px solid"><tr><td rowspan="7" valign="top"><img height="200px" width="150px" src="images/'+locations[i][3]+'" /></td></tr>';
+                    content += '<tr><td><label style="color:red;"> State</label> : <strong>'+locations[i][0]+'</strong></td></tr>';
+                    content += '<tr><td><label style="color:red;">Solar Energy</label> : <strong>'+locations[i][5]+'</strong> MW</td></tr>';
+                    content += '<tr><td><label style="color:red;">Small Hydro Energy</label> : <strong>'+locations[i][6]+'</strong> MW</td></tr>';
+                    content += '<tr><td><label style="color:red;">Bio Energy (Biomass)</label> : <strong>'+locations[i][7]+'</strong> MW</td></tr>';
+                    content += '<tr><td><label style="color:red;">Bio Energy (Bagase)</label> : <strong>'+locations[i][8]+'</strong> MW</td></tr>';
+                    content += '<tr><td><label style="color:red;">Wind Power</label> : <strong>'+locations[i][9]+'</strong>MW</td> </tr>';
+                    content += '<tr><td colspan="2"><label style="color:red;">FAEI</label> : <strong>'+locations[i][4]+'</strong></td></tr>';
+                    content += '</table>';
+                    var infoWindow = new google.maps.InfoWindow({ content: content,maxWidth:500 });
+                    infoWindow.open(map, marker);
+                }
+            })(marker, i));
+        }
+    }
+
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAnecEyBKQySK6P0l1gBm2Zn04EEGu1bEY&callback=initMap">
+	/*
+	 downloadUrl('https://localhost/php-apps/', function(data) {
+	 alert(data.responseXML);
+	 });
+	 function downloadUrl(url, callback) {
+	 var request = window.ActiveXObject ?
+	 new ActiveXObject('Microsoft.XMLHTTP') :
+	 new XMLHttpRequest;
+
+	 request.onreadystatechange = function() {
+	 if (request.readyState == 4) {
+	 request.onreadystatechange = doNothing;
+	 callback(request, request.status);
+	 }
+	 };
+
+	 request.open('GET', url, true);
+	 request.send(null);
+	 }
+	 function doNothing(){}
+	 */
+</script>

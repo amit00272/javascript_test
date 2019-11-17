@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Export pdf</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+
+    <script src='jspdf.debug.js'></script>
+    <script src='html2pdf.js'></script>
+
+</head>
+<body>
+
+
+<input type="button" name="btn"  value="Convert To Pdf "onClick="exportAsPdf();" />
+<input type="button" name="btn"  value="Export To excel "onClick="exportTbl();" />
+<table id="mytbl">
+
+    <tr>
+        <td>Andrew</td>
+        <td>Maria Anders</td>
+        <td>Germany</td>
+    </tr>
+    <tr>
+        <th style="width:500px;">Lorem ipsum dolor sit amet, vis ex sale omittantur, sit an prompta delicatissimi. Ancillae lucilius eos ei, iisque accusata ex qui. Cu suavitate patrioque sea, oblique dolores per id. Qui cu fastidii pericula quaerendum, et iracundia conceptam sit.</th>
+        <th style="width:40px;">Contact</th>
+        <th style="width:55px;">Country</th>
+    </tr>
+    <tr>
+        <td>Centro comercial Moctezuma</td>
+        <td>Francisco Chang</td>
+        <td>Mexico</td>
+    </tr>
+    <tr>
+        <td>Ernst Handel</td>
+        <td>Roland Mendel</td>
+        <td>Austria</td>
+    </tr>
+    <tr>
+        <td>Island Trading</td>
+        <td>Helen Bennett</td>
+        <td>UK</td>
+    </tr>
+    <tr>
+        <td>Laughing Bacchus Winecellars</td>
+        <td>Yoshi Tannamuri</td>
+        <td>Canada</td>
+    </tr>
+    <tr>
+        <td>Magazzini Alimentari Riuniti</td>
+        <td>Giovanni Rovelli</td>
+        <td>Italy</td>
+    </tr>
+</table>
+</body>
+<script>
+function exportAsPdf() {
+    var pdf = new jsPDF('p', 'pt','a3');
+
+    html2pdf(document.getElementById("mytbl"), pdf, function(pdf) {
+
+            pdf.save("exported.pdf");
+        }
+    );
+}
+
+</script>
+</html>
